@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>陈子明 | AI 产品作品集</title>
+  <meta name="description" content="陈子明的 AI 产品经理作品集，展示 AI 内容增长助手、AI 活动运营助手、AI 设计需求助手等产品案例。" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#0F172A",
+            sky: "#38BDF8",
+            soft: "#F8FAFC"
+          },
+          boxShadow: {
+            glow: "0 0 48px rgba(56, 189, 248, 0.18)"
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0F172A;
+      color: #F8FAFC;
+      text-align: left;
+    }
+    .glass {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #F8FAFC 0%, #BAE6FD 42%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .card-hover {
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-6px) scale(1.025);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 24px 80px rgba(56, 189, 248, 0.14);
+      background: rgba(15, 23, 42, 0.86);
+    }
+    .btn-pop {
+      transition: transform 160ms ease, border-color 160ms ease, color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+    .btn-pop:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(56, 189, 248, 0.14);
+    }
+    .btn-pop:active {
+      transform: scale(1.045);
+    }
+    .case-mini-card {
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.78) !important;
+      border-color: rgba(51, 65, 85, 0.95) !important;
+      will-change: transform;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+    .case-mini-card:hover,
+    .case-mini-card:focus-visible {
+      transform: translateY(-2px) scale(1.025);
+      border-color: rgba(248, 250, 252, 0.82) !important;
+      box-shadow: 0 14px 44px rgba(56, 189, 248, 0.13);
+    }
+    .case-mini-card:active {
+      transform: scale(1.075);
+    }
+    .case-mini-card.is-selected {
+      transform: scale(1.035);
+      border-color: rgba(248, 250, 252, 0.96) !important;
+      box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.18), 0 20px 60px rgba(56, 189, 248, 0.18);
+      background: rgba(15, 23, 42, 0.9) !important;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden font-sans antialiased">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-700/40 bg-ink/75 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="grid h-9 w-12 place-items-center rounded-md border border-sky/30 bg-sky/10 text-xs font-bold text-sky">AI PM</span>
+        <span class="text-sm font-semibold tracking-wide text-soft">陈子明</span>
+      </a>
+
+      <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+        <a class="hover:text-sky" href="#cases">作品</a>
+        <a class="hover:text-sky" href="#about">关于我</a>
+        <a class="hover:text-sky" href="#contact">联系我</a>
+      </nav>
+
+      <a href="#contact" class="btn-pop rounded-md border border-sky/30 px-4 py-2 text-sm font-medium text-sky hover:bg-sky/10">
+        Contact
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative flex min-h-screen items-center overflow-hidden pt-24">
+      <canvas id="particleCanvas" class="absolute inset-0 z-0"></canvas>
+      <div class="absolute inset-0 z-0 grid-bg opacity-40"></div>
+      <div class="absolute left-1/2 top-1/4 z-0 h-72 w-72 -translate-x-1/2 rounded-full bg-sky/20 blur-3xl"></div>
+
+      <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 md:grid-cols-[1.1fr_0.9fr] md:px-8">
+        <div>
+          <p class="mb-5 text-sm font-medium uppercase tracking-[0.28em] text-sky/80">
+            AI Product Portfolio
+          </p>
+          <h1 class="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[0.03em] md:text-7xl lg:text-8xl">
+            陈子明<br />
+            <span class="gradient-text">AI 产品作品集</span>
+          </h1>
+          <p class="mt-8 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+            从真实场景出发，拆用户问题，设计 AI 工作流，定义 MVP 功能、关键页面和评测指标。
+            作品聚焦内容增长、活动运营和需求澄清三个 AI 工具方向。
+          </p>
+
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a href="#cases" class="btn-pop rounded-md border border-slate-600 px-6 py-3 text-center text-sm font-semibold text-soft hover:border-sky/60 hover:text-sky">
+              查看作品
+            </a>
+            <a href="#about" class="btn-pop rounded-md border border-slate-600 px-6 py-3 text-center text-sm font-semibold text-soft hover:border-sky/60 hover:text-sky">
+              了解方向
+            </a>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-4 shadow-2xl">
+          <div class="rounded-lg border border-slate-700/60 bg-slate-950/80 p-4">
+            <div class="mb-4 flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <p class="text-xs uppercase tracking-[0.24em] text-slate-500">Workspace</p>
+                <h2 class="mt-1 text-lg font-semibold text-soft">AI Portfolio Board</h2>
+              </div>
+              <span class="rounded-full bg-sky/10 px-3 py-1 text-xs font-medium text-sky">Live</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="case-mini-card rounded-lg border p-4" role="button" tabindex="0">
+                <div class="flex items-center justify-between gap-4">
+                  <p class="text-sm font-semibold text-soft">AI 内容增长助手</p>
+                  <span class="text-xs text-sky">Case 01</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-300">选题、标题、正文、平台适配、复盘表。</p>
+              </div>
+
+              <div class="case-mini-card rounded-lg border p-4" role="button" tabindex="0">
+                <div class="flex items-center justify-between gap-4">
+                  <p class="text-sm font-semibold text-soft">AI 活动运营助手</p>
+                  <span class="text-xs text-slate-400">Case 02</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-400">客群分析、互动玩法、话术、风险清单。</p>
+              </div>
+
+              <div class="case-mini-card rounded-lg border p-4" role="button" tabindex="0">
+                <div class="flex items-center justify-between gap-4">
+                  <p class="text-sm font-semibold text-soft">AI 设计需求助手</p>
+                  <span class="text-xs text-slate-400">Case 03</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-400">需求追问、Brief、交付条件、检查表。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases" class="border-t border-slate-800 bg-ink px-5 py-24 md:px-8">
+      <div class="mx-auto max-w-7xl">
+          <div class="mb-12 max-w-3xl text-left">
+          <p class="text-sm font-medium uppercase tracking-[0.24em] text-sky/80">Selected Cases</p>
+          <h2 class="mt-4 text-4xl font-semibold tracking-[0.02em] text-soft md:text-5xl">三个 AI 产品案例</h2>
+          <p class="mt-5 text-base leading-8 text-slate-400">
+            每个案例围绕目标用户、场景问题、MVP 功能和评测指标展开，方便继续补原型和 PRD。
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="card-hover rounded-xl border border-slate-800 bg-slate-900/55 p-6">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-sky">Case 01</span>
+            <h3 class="mt-6 text-2xl font-semibold text-soft">AI 内容增长助手</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-400">
+              面向新媒体运营，帮助快速完成多平台选题、文案生成和发布后复盘。
+            </p>
+            <div class="mt-8 space-y-4">
+              <div>
+                <p class="text-sm font-semibold text-soft">MVP 功能</p>
+                <ul class="mt-3 space-y-2 text-sm leading-6 text-slate-400">
+                  <li>输入产品、人群、平台和目标</li>
+                  <li>生成选题、标题、正文和封面建议</li>
+                  <li>输出风险提示和复盘表</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-soft">评测指标</p>
+                <p class="mt-3 text-sm leading-6 text-slate-400">选题可用率、人工修改次数、生成耗时、互动反馈。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card-hover rounded-xl border border-slate-800 bg-slate-900/55 p-6">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-sky">Case 02</span>
+            <h3 class="mt-6 text-2xl font-semibold text-soft">AI 活动运营助手</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-400">
+              面向线下活动，基于场地、客群和预算生成活动方案、引流玩法和话术。
+            </p>
+            <div class="mt-8 space-y-4">
+              <div>
+                <p class="text-sm font-semibold text-soft">MVP 功能</p>
+                <ul class="mt-3 space-y-2 text-sm leading-6 text-slate-400">
+                  <li>输入地点、客群、预算和商品</li>
+                  <li>生成活动主题、互动玩法、人员分工</li>
+                  <li>输出现场风险清单</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-soft">评测指标</p>
+                <p class="mt-3 text-sm leading-6 text-slate-400">方案可执行度、引流人数、转化率、复盘质量。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card-hover rounded-xl border border-slate-800 bg-slate-900/55 p-6">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-sky">Case 03</span>
+            <h3 class="mt-6 text-2xl font-semibold text-soft">AI 设计需求助手</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-400">
+              面向设计交付，把客户模糊诉求转成清晰 Brief、优先级和交付检查表。
+            </p>
+            <div class="mt-8 space-y-4">
+              <div>
+                <p class="text-sm font-semibold text-soft">MVP 功能</p>
+                <ul class="mt-3 space-y-2 text-sm leading-6 text-slate-400">
+                  <li>追问用途、受众、风格、尺寸和时间</li>
+                  <li>生成设计 Brief 和交付清单</li>
+                  <li>提示版权和返工风险</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-soft">评测指标</p>
+                <p class="mt-3 text-sm leading-6 text-slate-400">需求补全率、返工次数、确认时间、风险命中率。</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="border-t border-slate-800 bg-slate-950 px-5 py-24 md:px-8">
+      <div class="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p class="text-sm font-medium uppercase tracking-[0.24em] text-sky/80">About</p>
+          <h2 class="mt-4 text-4xl font-semibold tracking-[0.02em] text-soft md:text-5xl">关于我</h2>
+        </div>
+        <div class="glass rounded-xl p-8">
+          <p class="text-base leading-8 text-slate-300">
+            我是陈子明，数字媒体专业在读，当前作品集聚焦 AI 产品经理方向。
+            我的优势是能从真实运营、活动和设计交付场景中提炼问题，并把问题转成可验证的 AI 工具方案。
+          </p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-lg border border-slate-800 bg-slate-900/70 p-4">
+              <p class="text-sm font-semibold text-soft">产品思维</p>
+              <p class="mt-2 text-sm text-slate-400">场景、问题、MVP、指标</p>
+            </div>
+            <div class="rounded-lg border border-slate-800 bg-slate-900/70 p-4">
+              <p class="text-sm font-semibold text-soft">AI 工具</p>
+              <p class="mt-2 text-sm text-slate-400">Prompt、RAG、Agent</p>
+            </div>
+            <div class="rounded-lg border border-slate-800 bg-slate-900/70 p-4">
+              <p class="text-sm font-semibold text-soft">交付表达</p>
+              <p class="mt-2 text-sm text-slate-400">原型、流程、评测表</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="border-t border-slate-800 bg-ink px-5 py-24 md:px-8">
+      <div class="mx-auto max-w-4xl text-left">
+        <p class="text-sm font-medium uppercase tracking-[0.24em] text-sky/80">Contact</p>
+        <h2 class="mt-4 text-4xl font-semibold tracking-[0.02em] text-soft md:text-5xl">联系我</h2>
+        <p class="mt-5 max-w-2xl text-base leading-8 text-slate-400">
+          如果你想进一步查看我的 AI 产品作品、原型或项目文档，可以通过邮箱联系我。
+        </p>
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+          <a href="mailto:xhxg95827@qq.com" class="btn-pop rounded-md bg-sky px-6 py-3 text-sm font-semibold text-ink shadow-glow hover:bg-sky/90">
+            xhxg95827@qq.com
+          </a>
+          <a href="#top" class="btn-pop rounded-md border border-slate-600 px-6 py-3 text-sm font-semibold text-soft hover:border-sky/60 hover:text-sky">
+            回到顶部
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let width = 0;
+    let height = 0;
+    let mouse = { x: 0, y: 0 };
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const count = window.innerWidth < 768 ? 42 : 72;
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.8 + 0.8
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        const dxMouse = p.x - mouse.x;
+        const dyMouse = p.y - mouse.y;
+        const mouseDist = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+        if (mouseDist < 120) {
+          p.x += dxMouse * 0.003;
+          p.y += dyMouse * 0.003;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(56, 189, 248, 0.55)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.16 * (1 - dist / 110)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("mousemove", (event) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+
+    document.querySelectorAll(".case-mini-card").forEach((card) => {
+      card.addEventListener("pointerdown", () => {
+        document.querySelectorAll(".case-mini-card").forEach((item) => item.classList.remove("is-selected"));
+        card.classList.add("is-selected");
+      });
+
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".case-mini-card").forEach((item) => item.classList.remove("is-selected"));
+        card.classList.add("is-selected");
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    resizeCanvas();
+    draw();
+  </script>
+</body>
+</html>
