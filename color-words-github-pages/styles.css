@@ -1,0 +1,237 @@
+@import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap");
+
+:root {
+  --paper: #f7f7f5;
+  --ink: #1229e8;
+  --top-left: #a7d778;
+  --top-right: #5fc0c3;
+  --bottom-left: #6fc9c7;
+  --bottom-right: #76d48e;
+  --next: #f59f74;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+body {
+  font-family: "Gaegu", "Comic Sans MS", cursive;
+}
+
+button {
+  font: inherit;
+}
+
+.experience {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--paper);
+  transition: background-color 280ms ease;
+}
+
+.shape {
+  position: absolute;
+  pointer-events: none;
+  transition: background-color 500ms ease, transform 700ms cubic-bezier(.2,.8,.2,1);
+}
+
+.shape--top-left {
+  top: -27%;
+  left: -15%;
+  width: 55%;
+  height: 74%;
+  background: var(--top-left);
+  border-radius: 43% 57% 47% 53% / 54% 45% 55% 46%;
+  transform: rotate(-9deg);
+}
+
+.shape--top-right {
+  top: -13%;
+  right: -6%;
+  width: 27%;
+  aspect-ratio: 1.16;
+  border-radius: 44% 56% 55% 45% / 48% 44% 56% 52%;
+  background: var(--top-right);
+  transform: rotate(-12deg);
+}
+
+.shape--top-right::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  bottom: -6%;
+  width: 71%;
+  height: 69%;
+  background: var(--paper);
+  border-radius: 50%;
+  transition: background-color 280ms ease;
+}
+
+.shape--bottom-left {
+  left: -8%;
+  bottom: -27%;
+  width: 43%;
+  height: 48%;
+  background: var(--bottom-left);
+  border-radius: 49% 51% 0 0 / 64% 59% 0 0;
+  transform: rotate(14deg);
+}
+
+.shape--bottom-left::after {
+  content: "";
+  position: absolute;
+  top: -23%;
+  right: 4%;
+  width: 36%;
+  height: 73%;
+  border-radius: 50% 50% 45% 55% / 72% 70% 30% 28%;
+  background: var(--bottom-left);
+  transform: rotate(30deg);
+}
+
+.shape--bottom-right {
+  right: 2%;
+  bottom: -29%;
+  width: 24%;
+  height: 67%;
+  border-radius: 52% 48% 0 0 / 78% 72% 0 0;
+  background: var(--bottom-right);
+  transform: rotate(-8deg);
+}
+
+.shape--bottom-right::before,
+.shape--bottom-right::after {
+  content: "";
+  position: absolute;
+  bottom: 8%;
+  width: 58%;
+  height: 82%;
+  border-radius: 52% 48% 10% 10% / 82% 77% 23% 18%;
+  background: var(--bottom-right);
+}
+
+.shape--bottom-right::before {
+  left: -37%;
+  transform: rotate(-28deg);
+  transform-origin: 50% 100%;
+}
+
+.shape--bottom-right::after {
+  right: -35%;
+  height: 69%;
+  transform: rotate(27deg);
+  transform-origin: 50% 100%;
+}
+
+.word {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  padding: 1rem 1.5rem;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transform: translate(-50%, -50%) rotate(-1deg);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.word__label {
+  display: block;
+  font-size: clamp(3rem, 5.2vw, 5.4rem);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: .025em;
+  transition: transform 180ms ease;
+}
+
+.word:hover .word__label,
+.word:focus-visible .word__label {
+  transform: scale(1.08);
+}
+
+.word:focus-visible {
+  outline: none;
+}
+
+.hint {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 3.5%;
+  margin: 0;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .18em;
+  opacity: .34;
+  transform: translateX(-50%);
+  text-transform: uppercase;
+}
+
+.transition-layer {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  width: 10vmax;
+  height: 10vmax;
+  border-radius: 50%;
+  background: var(--next);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.experience.is-transitioning .transition-layer {
+  animation: flood 780ms cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
+.experience.is-transitioning .word {
+  z-index: 5;
+  pointer-events: none;
+  animation: word-bloom 780ms cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
+.experience.is-transitioning .hint {
+  opacity: 0;
+}
+
+@keyframes flood {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0); }
+  75%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(32); }
+}
+
+@keyframes word-bloom {
+  0% { color: var(--ink); transform: translate(-50%, -50%) scale(1) rotate(-1deg); opacity: 1; }
+  62% { color: var(--paper); transform: translate(-50%, -50%) scale(8) rotate(-1deg); opacity: 1; }
+  82%, 100% { color: var(--paper); transform: translate(-50%, -50%) scale(13) rotate(-1deg); opacity: 0; }
+}
+
+@media (max-width: 700px) {
+  .shape--top-left { top: -18%; left: -28%; width: 79%; height: 55%; }
+  .shape--top-right { top: -7%; right: -13%; width: 43%; }
+  .shape--bottom-left { left: -19%; bottom: -22%; width: 58%; height: 39%; }
+  .shape--bottom-right { right: 1%; bottom: -25%; width: 32%; height: 54%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
